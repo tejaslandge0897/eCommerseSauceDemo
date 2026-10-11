@@ -2,6 +2,11 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from "dotenv"
 
 dotenv.config()
+if (!process.env.BASE_URL) {
+  throw new Error(
+    'BASE_URL is missing. Please configure it in your .env file or CI environment.'
+  );
+}
 
 /**
  * Read environment variables from file.
