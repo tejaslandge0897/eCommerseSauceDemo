@@ -3,15 +3,10 @@ import { Page, Locator } from "@playwright/test";
 export class ProductPage {
 
     readonly productItems: Locator;
-    readonly addToCartBtn: Locator; 
     readonly cartButton: Locator;
 
     constructor(private page: Page) {
         this.productItems = this.page.locator('.inventory_item');
-
-        this.addToCartBtn = this.page.getByRole('button', {
-            name: /Add to cart/i
-        });
 
         this.cartButton = this.page.locator('.shopping_cart_link');
     }
