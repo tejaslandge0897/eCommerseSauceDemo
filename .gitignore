@@ -8,3 +8,7 @@ node_modules/
 
 # Environment variables
 .env
+
+# Allure reports
+allure-results/
+allure-report/
