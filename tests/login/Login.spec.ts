@@ -1,9 +1,8 @@
-import {test, expect} from "@playwright/test"
-import {LoginPage} from '../../pages/LoginPage'
+import {test, expect} from "../../fixtures/testFixtures"
 import users from '../../test-data/users.json'
 
-test("User should Login Successfully",async({page})=>{
-    const loginPage= new LoginPage(page)
+test("User should Login Successfully",async({page,loginPage})=>{
+    
     await page.goto('/')
 
     await loginPage.login(users.standardUser.username,users.standardUser.password)

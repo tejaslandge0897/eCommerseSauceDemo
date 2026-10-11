@@ -1,25 +1,14 @@
-import { test, expect } from '@playwright/test';
-import { ProductPage } from '../../pages/ProductPage';
-import { CartPage } from '../../pages/CartPage';
-import { CheckoutPage } from '../../pages/CheckOutPage';
-import { CheckoutOverviewPage } from '../../pages/CheckOutOverViewPage';
-import { CheckoutCompletePage } from '../../pages/CheckOutCompletePage';
+import { test, expect } from '../../fixtures/testFixtures';
 import products from '../../test-data/products.json';
 import checkOut from '../../test-data/checkOut.json';
 
-test('User can proceed to checkout', async ({ page }) => {
+test('User can proceed to checkout', async ({ page, productPage, cartPage, checkoutPage, checkoutOverviewPage, checkoutCompletePage }) => {
 
     await page.goto('/inventory.html');
 
-    const productsPage = new ProductPage(page);
-    const cartPage = new CartPage(page);
-    const checkPage = new CheckoutPage(page);
-    const overViewPage = new CheckoutOverviewPage(page);
-    const checkCompletePage = new CheckoutCompletePage(page);
+    await productPage.addProductToCart(products.backpack.name);
 
-    await productsPage.addProductToCart(products.backpack.name);
-
-    await productsPage.openCart();
+    await productPage.openCart();
 
     await expect(cartPage.cartItems).toContainText(
         products.backpack.name
@@ -29,19 +18,19 @@ test('User can proceed to checkout', async ({ page }) => {
 
     await expect(page).toHaveURL(/checkout-step-one.html/);
 
-    await checkPage.fillCustomerInformation(
+    await checkoutPage.fillCustomerInformation(
         checkOut.customer.firstName,
         checkOut.customer.lastName,
         checkOut.customer.postalCode
     );
 
-    await checkPage.continueToOverview();
+    await checkoutPage.continueToOverview();
 
-    await expect(overViewPage.cartItems)
+    await expect(checkoutOverviewPage.cartItems)
         .toContainText(products.backpack.name);
 
-    await overViewPage.finishOrder();
+    await checkoutOverviewPage.finishOrder();
 
-    await expect(checkCompletePage.successMessage)
+    await expect(checkoutCompletePage.successMessage)
         .toBeVisible();
 });

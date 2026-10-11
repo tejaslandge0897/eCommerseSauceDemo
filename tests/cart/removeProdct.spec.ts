@@ -1,18 +1,13 @@
-import { test, expect } from '@playwright/test';
-import { ProductPage } from '../../pages/ProductPage';
-import { CartPage } from '../../pages/CartPage';
+import { test, expect } from '../../fixtures/testFixtures';
 import products from '../../test-data/products.json';
 
-test('Remove Product from Cart', async ({ page }) => {
+test('Remove Product from Cart', async ({ page,productPage,cartPage }) => {
 
     await page.goto('/inventory.html');
 
-    const productsPage = new ProductPage(page);
-    const cartPage = new CartPage(page);
+    await productPage.addProductToCart(products.backpack.name);
 
-    await productsPage.addProductToCart(products.backpack.name);
-
-    await productsPage.openCart();
+    await productPage.openCart();
 
     await expect(cartPage.cartItems)
         .toContainText(products.backpack.name);
