@@ -7,5 +7,5 @@ test('verify products are displayed', async ({ page , productPage}) => {
    
     await expect(page).toHaveURL(/inventory.html/)
     
-    await expect(productPage.productItems).toHaveCount(6)
+    await expect(productPage.productItems).toHaveCount(9)
 });
