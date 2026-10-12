@@ -23,9 +23,12 @@ pipeline {
         }
 
         stage('Run Playwright Tests') {
-            steps {
-                bat 'npx playwright test'
-            }
-        }
+    environment {
+        BASE_URL = 'https://www.saucedemo.com'
+    }
+    steps {
+        bat 'npx playwright test'
+    }
+}
     }
 }
