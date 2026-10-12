@@ -230,3 +230,5 @@ GitHub: https://github.com/tejaslandge0897/eCommerseSauceDemo
 - Add test execution across additional browsers where required.
 - Improve test reporting and failure diagnostics.
 - Add further API tests when suitable application endpoints are available.
+
+Jenkins SCM polling verification.
