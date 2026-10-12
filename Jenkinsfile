@@ -32,16 +32,23 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            publishHTML(target: [
-                reportDir: 'playwright-report',
-                reportFiles: 'index.html',
-                reportName: 'Playwright HTML Report',
-                keepAll: true,
-                alwaysLinkToLastBuild: true,
-                allowMissing: true
-            ])
-        }
+   
+post {
+    always {
+        publishHTML(target: [
+            reportDir: 'playwright-report',
+            reportFiles: 'index.html',
+            reportName: 'Playwright HTML Report',
+            keepAll: true,
+            alwaysLinkToLastBuild: true,
+            allowMissing: true
+        ])
+
+        archiveArtifacts(
+            artifacts: 'test-results/**/*, playwright-report/**/*, allure-results/**/*',
+            allowEmptyArchive: true,
+            fingerprint: true
+        )
     }
+}
 }
