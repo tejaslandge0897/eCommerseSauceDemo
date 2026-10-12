@@ -3,13 +3,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Checking out Playwright project'
-                checkout scm
-            }
-        }
-
+       
         stage('Install Dependencies') {
             steps {
                 bat 'npm ci'
