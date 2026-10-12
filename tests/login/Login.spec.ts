@@ -6,7 +6,7 @@ test("User should Login Successfully",async({page,loginPage})=>{
     await page.goto('/')
 
     await loginPage.login(users.standardUser.username,users.standardUser.password)
-    await expect(page).toHaveURL(/checkout.html/)
+    await expect(page).toHaveURL(/inventory.html/)
 })
 
 test("User should not login with invalid credentials", async ({ page, loginPage }) => {
