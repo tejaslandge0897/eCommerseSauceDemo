@@ -23,12 +23,25 @@ pipeline {
         }
 
         stage('Run Playwright Tests') {
-    environment {
-        BASE_URL = 'https://www.saucedemo.com'
+            environment {
+                BASE_URL = 'https://www.saucedemo.com'
+            }
+            steps {
+                bat 'npx playwright test'
+            }
+        }
     }
-    steps {
-        bat 'npx playwright test'
-    }
-}
+
+    post {
+        always {
+            publishHTML(target: [
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                reportName: 'Playwright HTML Report',
+                keepAll: true,
+                alwaysLinkToLastBuild: true,
+                allowMissing: true
+            ])
+        }
     }
 }
