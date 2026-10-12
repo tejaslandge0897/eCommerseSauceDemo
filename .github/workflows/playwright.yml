@@ -1,4 +1,6 @@
+# CI pipeline practice: feature branch
 name: Playwright Tests
+
 
 on:
   push:
